@@ -100,6 +100,10 @@ dqn.compile(Adam(learning_rate=.00025), metrics=['mae'])
 # Okay, now it's time to learn something! We capture the interrupt exception so that training
 # can be prematurely aborted. Notice that now you can use the built-in tensorflow.keras callbacks!
 weights_filename = f'dqn_{args.env_name}_weights.h5f'
+    try:
+        dqn.load_weights(weights_filename)
+    except:
+        pass
 checkpoint_weights_filename = 'dqn_' + args.env_name + '_weights_{step}.h5f'
 log_filename = f'dqn_{args.env_name}_log.json'
 callbacks = [ModelIntervalCheckpoint(checkpoint_weights_filename, interval=250000)]
